@@ -3,5 +3,7 @@
   "manifest_version": 3,
   "name": "Rewrite Origin",
   "version": "0.0.1",
-  "action": { "default_popup": "index.html" }
+  "permissions": ["webNavigation", "storage"],
+  "action": { "default_popup": "index.html" },
+  "background": { "service_worker": "src/service-worker.ts", "type": "module" }
 }
