@@ -10,8 +10,6 @@ function saveToStorage() {
 }
 
 function rerender() {
-  console.log(rewrites);
-
   const template = html`
     ${rewrites.map(
       (rewrite, i) =>
