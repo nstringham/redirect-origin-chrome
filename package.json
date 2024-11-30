@@ -1,5 +1,5 @@
 {
-  "name": "rewrite-origin-chrome",
+  "name": "redirect-origin-chrome",
   "private": true,
   "version": "0.0.0",
   "type": "module",
