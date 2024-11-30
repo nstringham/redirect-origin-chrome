@@ -17,6 +17,24 @@ function saveToStorage() {
   chrome.storage.sync.set<Storage>({ rules });
 }
 
+function validateUrlInput(input: HTMLInputElement) {
+  try {
+    const url = new URL(input.value);
+    if (url.origin != input.value) {
+      input.setCustomValidity(`Did you mean "${url.origin}"?`);
+    } else {
+      input.setCustomValidity("");
+    }
+  } catch (error) {
+    if (error instanceof TypeError && error.message.includes("Invalid URL")) {
+      input.setCustomValidity("Invalid origin.");
+    } else {
+      input.setCustomValidity(String(error));
+    }
+  }
+  input.reportValidity();
+}
+
 function rerender() {
   const template = html`
     <h1 class="md-typescale-title-large">Redirect Origin</h1>
@@ -26,9 +44,11 @@ function rerender() {
         html`
           <md-outlined-text-field
             label="Source"
+            type="url"
             value="${rule.source}"
-            @change=${(event: Event) => {
+            @input=${(event: Event) => {
               const input = event.target as HTMLInputElement;
+              validateUrlInput(input);
               rule.source = input.value;
               saveToStorage();
             }}
@@ -44,9 +64,11 @@ function rerender() {
 
           <md-outlined-text-field
             label="Destination"
+            type="url"
             value=${rule.destination}
-            @change=${(event: Event) => {
+            @input=${(event: Event) => {
               const input = event.target as HTMLInputElement;
+              validateUrlInput(input);
               rule.destination = input.value;
               saveToStorage();
             }}
