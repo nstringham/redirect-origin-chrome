@@ -1,26 +1,26 @@
-import type { Rewrite, Storage } from "./types";
+import type { RedirectRule, Storage } from "./types";
 
-let rewriteMap: { [key: string]: string };
+let redirectMap: { [key: string]: string };
 
-function onRewritesUpdated(rewrites: Rewrite[]) {
-  rewriteMap = Object.fromEntries(rewrites.map(({ source, destination }) => [source, destination]));
+function onRedirectsUpdated(rules: RedirectRule[]) {
+  redirectMap = Object.fromEntries(rules.map(({ source, destination }) => [source, destination]));
 }
 
-chrome.storage.sync.get<Storage>("rewrites").then(({ rewrites }) => {
-  onRewritesUpdated(rewrites);
+chrome.storage.sync.get<Storage>("rules").then(({ rules }) => {
+  onRedirectsUpdated(rules ?? []);
 });
 
 chrome.storage.sync.onChanged.addListener((changes) => {
-  if ("rewrites" in changes) {
-    onRewritesUpdated(changes.rewrites.newValue);
+  if ("rules" in changes) {
+    onRedirectsUpdated(changes.rules.newValue);
   }
 });
 
 chrome.webNavigation.onBeforeNavigate.addListener(({ url, tabId }) => {
   const origin = new URL(url).origin;
 
-  if (origin in rewriteMap) {
-    const newURl = url.replace(origin, rewriteMap[origin]);
+  if (origin in redirectMap) {
+    const newURl = url.replace(origin, redirectMap[origin]);
 
     chrome.tabs.update(tabId, { url: newURl });
   }

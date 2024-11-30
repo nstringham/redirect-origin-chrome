@@ -1,8 +1,8 @@
-export type Rewrite = {
+export type RedirectRule = {
   source: string;
   destination: string;
 };
 
 export type Storage = {
-  rewrites: Rewrite[];
+  rules?: RedirectRule[];
 };
