@@ -40,57 +40,56 @@ function rerender() {
     <h1 class="md-typescale-title-large">Redirect Origin</h1>
 
     ${rules.map(
-      (rule, i) =>
-        html`
-          <md-outlined-text-field
-            label="Source"
-            type="url"
-            value="${rule.source}"
-            @input=${(event: Event) => {
-              const input = event.target as HTMLInputElement;
-              validateUrlInput(input);
-              rule.source = input.value;
-              saveToStorage();
-            }}
-          >
-          </md-outlined-text-field>
+      (rule, i) => html`
+        <md-outlined-text-field
+          label="Source"
+          type="url"
+          value="${rule.source}"
+          @input=${(event: Event) => {
+            const input = event.target as HTMLInputElement;
+            validateUrlInput(input);
+            rule.source = input.value;
+            saveToStorage();
+          }}
+        >
+        </md-outlined-text-field>
 
+        <md-icon>
+          <svg viewBox="0 0 24 24">
+            <title>Redirects To</title>
+            <path d=${mdiArrowRightBold} />
+          </svg>
+        </md-icon>
+
+        <md-outlined-text-field
+          label="Destination"
+          type="url"
+          value=${rule.destination}
+          @input=${(event: Event) => {
+            const input = event.target as HTMLInputElement;
+            validateUrlInput(input);
+            rule.destination = input.value;
+            saveToStorage();
+          }}
+        >
+        </md-outlined-text-field>
+
+        <md-icon-button
+          class="delete"
+          @click=${() => {
+            rules.splice(i, 1);
+            rerender();
+            saveToStorage();
+          }}
+        >
           <md-icon>
             <svg viewBox="0 0 24 24">
-              <title>Redirects To</title>
-              <path d=${mdiArrowRightBold} />
+              <title>Delete</title>
+              <path d=${mdiDelete} />
             </svg>
           </md-icon>
-
-          <md-outlined-text-field
-            label="Destination"
-            type="url"
-            value=${rule.destination}
-            @input=${(event: Event) => {
-              const input = event.target as HTMLInputElement;
-              validateUrlInput(input);
-              rule.destination = input.value;
-              saveToStorage();
-            }}
-          >
-          </md-outlined-text-field>
-
-          <md-icon-button
-            class="delete"
-            @click=${() => {
-              rules.splice(i, 1);
-              rerender();
-              saveToStorage();
-            }}
-          >
-            <md-icon>
-              <svg viewBox="0 0 24 24">
-                <title>Delete</title>
-                <path d=${mdiDelete} />
-              </svg>
-            </md-icon>
-          </md-icon-button>
-        `
+        </md-icon-button>
+      `,
     )}
     <md-filled-button
       class="new-rule"
