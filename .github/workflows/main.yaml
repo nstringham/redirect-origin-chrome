@@ -4,6 +4,17 @@ on:
   - push
 
 jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    name: Prettier
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+      - run: npm ci
+      - run: npx prettier -c .
+
   build:
     runs-on: ubuntu-latest
     name: Build
