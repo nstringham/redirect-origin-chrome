@@ -6,6 +6,6 @@ export const manifest: ManifestV3Export = {
   description: "A Chrome extension to configure redirecting one origin to another while preserving path",
   version: "0.0.1",
   permissions: ["webNavigation", "storage"],
-  action: { default_popup: "src/popup.html" },
+  action: { default_popup: "popup.html" },
   background: { service_worker: "src/service-worker.ts", type: "module" },
 };
