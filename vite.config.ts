@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [crx({ manifest })],
   build: {
     target: "esnext",
+    modulePreload: { polyfill: false },
     rollupOptions: {
       output: {
         chunkFileNames: "[name].js",
