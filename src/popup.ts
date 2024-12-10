@@ -44,7 +44,7 @@ function rerender() {
         <md-outlined-text-field
           label="Source"
           type="url"
-          value="${rule.source}"
+          .value="${rule.source}"
           @input=${(event: Event) => {
             const input = event.target as HTMLInputElement;
             validateUrlInput(input);
@@ -64,7 +64,7 @@ function rerender() {
         <md-outlined-text-field
           label="Destination"
           type="url"
-          value=${rule.destination}
+          .value=${rule.destination}
           @input=${(event: Event) => {
             const input = event.target as HTMLInputElement;
             validateUrlInput(input);
