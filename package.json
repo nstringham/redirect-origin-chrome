@@ -9,14 +9,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^2.0.0-beta.28",
-    "@types/chrome": "^0.0.287",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.3"
+    "@crxjs/vite-plugin": "^2.0.0-beta.32",
+    "@types/chrome": "^0.0.313",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.2.5"
   },
   "dependencies": {
-    "@material/web": "^2.2.0",
+    "@material/web": "^2.3.0",
     "@mdi/js": "^7.4.47",
     "lit": "^3.2.1"
   }
