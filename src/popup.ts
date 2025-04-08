@@ -8,6 +8,7 @@ import "@material/web/typography/md-typescale-styles.css";
 import { html, render } from "lit";
 import type { RedirectRule, Storage } from "./types";
 import { mdiArrowRightBold, mdiDelete, mdiPlus } from "@mdi/js";
+import logo from "./logo.svg";
 
 const rules: RedirectRule[] = (await chrome.storage.sync.get<Storage>("rules")).rules ?? [
   { source: "", destination: "" },
@@ -37,7 +38,10 @@ function validateUrlInput(input: HTMLInputElement) {
 
 function rerender() {
   const template = html`
-    <h1 class="md-typescale-title-large">Redirect Origin</h1>
+    <h1 class="md-typescale-title-large">
+      <img src="${logo}" width="36" height="36" role="presentation" />
+      Redirect Origin
+    </h1>
 
     ${rules.map(
       (rule, i) => html`
