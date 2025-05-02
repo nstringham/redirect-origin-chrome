@@ -13,7 +13,7 @@
     "@types/chrome": "^0.0.313",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "vite": "^6.2.5"
+    "vite": "^6.3.4"
   },
   "dependencies": {
     "@material/web": "^2.3.0",
