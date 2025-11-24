@@ -12,7 +12,7 @@ chrome.storage.sync.get<Storage>("rules").then(({ rules }) => {
 
 chrome.storage.sync.onChanged.addListener((changes) => {
   if ("rules" in changes) {
-    onRedirectsUpdated(changes.rules.newValue);
+    onRedirectsUpdated((changes.rules.newValue as Storage["rules"]) ?? []);
   }
 });
 
