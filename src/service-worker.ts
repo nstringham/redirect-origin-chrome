@@ -20,8 +20,8 @@ chrome.webNavigation.onBeforeNavigate.addListener(({ url, tabId }) => {
   const origin = new URL(url).origin;
 
   if (origin in redirectMap) {
-    const newURl = url.replace(origin, redirectMap[origin]);
+    const newUrl = url.replace(origin, redirectMap[origin]);
 
-    chrome.tabs.update(tabId, { url: newURl });
+    chrome.tabs.update(tabId, { url: newUrl });
   }
 });
