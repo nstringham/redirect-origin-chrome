@@ -4,16 +4,16 @@ on:
   - push
 
 jobs:
-  prettier:
+  oxfmt:
     runs-on: ubuntu-latest
-    name: Prettier
+    name: Check formatting
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           cache: "npm"
       - run: npm ci
-      - run: npx prettier -c .
+      - run: npx oxfmt --check
 
   build:
     runs-on: ubuntu-latest
