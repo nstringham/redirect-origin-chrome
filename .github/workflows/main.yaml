@@ -9,24 +9,28 @@ jobs:
     name: Check formatting
     steps:
       - uses: actions/checkout@v6
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.0.8
       - uses: actions/setup-node@v6
         with:
           node-version: 26
-          cache: "npm"
-      - run: npm ci
-      - run: npx oxfmt --check
+          cache: "pnpm"
+      - run: pnpm ci
+      - run: pnpx oxfmt --check
 
   build:
     runs-on: ubuntu-latest
     name: Build
     steps:
       - uses: actions/checkout@v6
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.0.8
       - uses: actions/setup-node@v6
         with:
           node-version: 26
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm ci
+      - run: pnpm run build
       - uses: actions/upload-artifact@v7
         with:
           name: redirect-origin
